@@ -16,6 +16,19 @@ public class Order {
     public Order() {
     }
 
+    public Order(long id_order, long[] bundleId, String startPoint, String finalPoint, Double price,
+                 Double weight, String volume, String sendDate, String receiveDate) {
+        this.id_order = id_order;
+        this.bundleId = bundleId;
+        this.startPoint = startPoint;
+        this.finalPoint = finalPoint;
+        this.price = price;
+        this.weight = weight;
+        this.volume = volume;
+        this.sendDate = sendDate;
+        this.receiveDate = receiveDate;
+    }
+
     public long getId_order() {
         return id_order;
     }
