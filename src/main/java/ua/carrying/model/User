@@ -3,7 +3,7 @@ package ua.carrying.model;
 public class User {
 
     private long id;
-    private long id_order;
+
     private String userName;
     private String email;
     private String password;
@@ -14,24 +14,16 @@ public class User {
 
     }
 
-    public User(long id, long id_order, String userName, String email, String password, String phone, int role) {
+    public User(long id, String userName, String email, String password, String phone, int role) {
         this.id = id;
         this.userName = userName;
         this.email = email;
         this.password = password;
         this.phone = phone;
         this.role = role;
-        this.id_order = id_order;
 
     }
 
-    public long getId_order() {
-        return id_order;
-    }
-
-    public void setId_order(long id_order) {
-        this.id_order = id_order;
-    }
 
     public int getRole() {
         return role;
@@ -85,7 +77,6 @@ public class User {
     public String toString() {
         return "User{" +
                 "id=" + id +
-                ", id_order=" + id_order +
                 ", userName='" + userName + '\'' +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
