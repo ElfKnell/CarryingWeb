@@ -106,7 +106,7 @@ public class Order {
     public String toString() {
         return "Order{" +
                 "id_order=" + id_order +
-                ", bundleId=" + id +
+                ", id=" + id +
                 ", startPoint='" + startPoint + '\'' +
                 ", finalPoint='" + finalPoint + '\'' +
                 ", price=" + price +
