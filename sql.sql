@@ -8,3 +8,6 @@ CREATE TABLE user
     role int NOT NULL COMMENT '1-admin, 2-moderator, 3-ferryman, 4-customer',
     id_order int NOT NULL
 );
+
+
+Ім'я бази - carruying;
