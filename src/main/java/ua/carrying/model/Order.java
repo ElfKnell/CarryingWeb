@@ -4,7 +4,8 @@ import java.util.Arrays;
 
 public class Order {
     private long id_order;
-    private long bundleId[];
+
+    private long id;//we need o discuss that point
     private String startPoint;
     private String finalPoint;
     private Double price;
@@ -16,10 +17,10 @@ public class Order {
     public Order() {
     }
 
-    public Order(long id_order, long[] bundleId, String startPoint, String finalPoint, Double price,
+    public Order(long id_order, long id, String startPoint, String finalPoint, Double price,
                  Double weight, String volume, String sendDate, String receiveDate) {
         this.id_order = id_order;
-        this.bundleId = bundleId;
+        this.id = id;
         this.startPoint = startPoint;
         this.finalPoint = finalPoint;
         this.price = price;
@@ -37,12 +38,12 @@ public class Order {
         this.id_order = id_order;
     }
 
-    public long[] getBundleId() {
-        return bundleId;
+    public long getId() {
+        return id;
     }
 
-    public void setBundleId(long[] bundleId) {
-        this.bundleId = bundleId;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getStartPoint() {
@@ -105,7 +106,7 @@ public class Order {
     public String toString() {
         return "Order{" +
                 "id_order=" + id_order +
-                ", bundleId=" + Arrays.toString(bundleId) +
+                ", bundleId=" + id +
                 ", startPoint='" + startPoint + '\'' +
                 ", finalPoint='" + finalPoint + '\'' +
                 ", price=" + price +
