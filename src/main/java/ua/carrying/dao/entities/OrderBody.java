@@ -7,8 +7,6 @@ public class OrderBody {
 
     private long id;
     private long id_order;
-    private String startPlace;
-    private String finalPlace;
     private Double price;
     private Double weight;
     private String volume;
@@ -18,13 +16,11 @@ public class OrderBody {
     public OrderBody() {
     }
 
-    public OrderBody(long id, long id_order, String startPlace,
-                     String finalPlace, Double price, Double weight, String volume,
+    public OrderBody(long id, long id_order, Double price,
+                     Double weight, String volume,
                      String sendDate, String receiveDate) {
         this.id = id;
         this.id_order = id_order;
-        this.startPlace = startPlace;
-        this.finalPlace = finalPlace;
         this.price = price;
         this.weight = weight;
         this.volume = volume;
@@ -46,22 +42,6 @@ public class OrderBody {
 
     public void setId_order(long id_order) {
         this.id_order = id_order;
-    }
-
-    public String getStartPlace() {
-        return startPlace;
-    }
-
-    public void setStartPlace(String startPlace) {
-        this.startPlace = startPlace;
-    }
-
-    public String getFinalPlace() {
-        return finalPlace;
-    }
-
-    public void setFinalPlace(String finalPlace) {
-        this.finalPlace = finalPlace;
     }
 
     public Double getPrice() {
@@ -109,8 +89,6 @@ public class OrderBody {
         return "Order{" +
                 "id=" + id +
                 ", id_order=" + id_order +
-                ", startPlace='" + startPlace + '\'' +
-                ", finalPlace='" + finalPlace + '\'' +
                 ", price=" + price +
                 ", weight=" + weight +
                 ", volume='" + volume + '\'' +

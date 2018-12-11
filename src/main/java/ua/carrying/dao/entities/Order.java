@@ -8,18 +8,20 @@ public class Order {
     private long id;
     private long id_customer;
     private long id_ferryman;
-    private long id_body;
+    private String startPlace;
+    private String finalPlace;
     private String orderDate;
 
     public Order() {
     }
 
     public Order(long id, long id_customer, long id_ferryman,
-                 long id_body, String orderDate) {
+                 String startPlace, String finalPlace, String orderDate) {
         this.id = id;
         this.id_customer = id_customer;
         this.id_ferryman = id_ferryman;
-        this.id_body = id_body;
+        this.startPlace = startPlace;
+        this.finalPlace = finalPlace;
         this.orderDate = orderDate;
     }
 
@@ -55,13 +57,30 @@ public class Order {
         this.orderDate = orderDate;
     }
 
+    public String getStartPlace() {
+        return startPlace;
+    }
+
+    public void setStartPlace(String startPlace) {
+        this.startPlace = startPlace;
+    }
+
+    public String getFinalPlace() {
+        return finalPlace;
+    }
+
+    public void setFinalPlace(String finalPlace) {
+        this.finalPlace = finalPlace;
+    }
+
     @Override
     public String toString() {
         return "Order{" +
                 "id=" + id +
                 ", id_customer=" + id_customer +
                 ", id_ferryman=" + id_ferryman +
-                ", id_body=" + id_body +
+                ", startPlace='" + startPlace + '\'' +
+                ", finalPlace='" + finalPlace + '\'' +
                 ", orderDate='" + orderDate + '\'' +
                 '}';
     }
