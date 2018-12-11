@@ -10,7 +10,7 @@ public class OrderRepository {
         DataSource dataSource = new DataSource();
 
         String query = "SELECT id, userName, email, password, roleid, id_customer, id_ferryman," +
-                "startPlace, finalPlace, price, weight, volume,sendDate, receiveDate FROM order " +
+                "startPlace, finalPlace,orderDate FROM order " +
                 "WHERE user.id=" + id;
 
         try (Connection conn = dataSource.getConnection();
@@ -24,11 +24,7 @@ public class OrderRepository {
                         rs.getLong("id_ferryman"),
                         rs.getString( "startPlace"),
                         rs.getString("finalPlace"),
-                        rs.getDouble("price"),
-                        rs.getDouble("weight"),
-                        rs.getString("volume"),
-                        rs.getString("sendDate"),
-                        rs.getString("receiveDate")
+                        rs.getString("orderDate")
                 );
 
                 return order;
@@ -45,23 +41,19 @@ public class OrderRepository {
         try (
                 Connection conn = dataSource.getConnection();
                 PreparedStatement stmt = conn.prepareStatement("INSERT INTO order (id," +
-                        "id_customer, id_ferryman, startPlace,finalPlace,price, " +
-                        "weight,volume,sendDate,receiveDate) VALUES (?,?,?,?,?,?,?,?,?,?)")
+                        "id_customer, id_ferryman, startPlace,finalPlace," +
+                        "orderDate) VALUES (?,?,?,?,?,?,?,?,?,?)")
         ) {
-            stmt.setString(1, order.setId());
-            stmt.setString(2, order.setId_customer());
-            stmt.setString(3, order.setId_ferryman());
-            stmt.setString(4, order.setStartPlace());
-            stmt.setString(5, order.setFinalPlace());
-            stmt.setString(6, order.setPrice());
-            stmt.setString(7, order.setWeight());
-            stmt.setString(8, order.setVolume());
-            stmt.setString(9, order.setSendDate());
-            stmt.setString(9, order.setReceiveDate());
+            stmt.setString(1, order.getId());
+            stmt.setString(2, order.getId_customer());
+            stmt.setString(3, order.getId_ferryman());
+            stmt.setString(4, order.getStartPlace());
+            stmt.setString(5, order.getFinalPlace());
+            stmt.setString(6, order.getOrderDate());
 
             stmt.executeUpdate();
         }  catch (SQLException e) {
-            e.printStackTrace();
+            e.printStackTrace()
         }
     }
 }
