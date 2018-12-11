@@ -1,4 +1,4 @@
-package ua.carrying.model;
+package ua.carrying.dao.entities;
 
 public class Admin {
 

@@ -1,10 +1,12 @@
-package ua.carrying.model;
+package ua.carrying.dao.entities;
 
-public class Order {
+/**
+ * Модель призначена для вказання всіх полів замовлення.
+ */
+public class OrderBody {
 
     private long id;
-    private long id_customer;
-    private long id_ferryman;
+    private long id_order;
     private String startPlace;
     private String finalPlace;
     private Double price;
@@ -13,15 +15,14 @@ public class Order {
     private String sendDate;
     private String receiveDate;
 
-    public Order() {
+    public OrderBody() {
     }
 
-    public Order(long id, long id_customer, long id_ferryman, String startPlace,
-                 String finalPlace, Double price, Double weight, String volume,
-                 String sendDate, String receiveDate) {
+    public OrderBody(long id, long id_order, String startPlace,
+                     String finalPlace, Double price, Double weight, String volume,
+                     String sendDate, String receiveDate) {
         this.id = id;
-        this.id_customer = id_customer;
-        this.id_ferryman = id_ferryman;
+        this.id_order = id_order;
         this.startPlace = startPlace;
         this.finalPlace = finalPlace;
         this.price = price;
@@ -39,20 +40,12 @@ public class Order {
         this.id = id;
     }
 
-    public long getId_customer() {
-        return id_customer;
+    public long getId_order() {
+        return id_order;
     }
 
-    public void setId_customer(long id_customer) {
-        this.id_customer = id_customer;
-    }
-
-    public long getId_ferryman() {
-        return id_ferryman;
-    }
-
-    public void setId_ferryman(long id_ferryman) {
-        this.id_ferryman = id_ferryman;
+    public void setId_order(long id_order) {
+        this.id_order = id_order;
     }
 
     public String getStartPlace() {
@@ -115,8 +108,7 @@ public class Order {
     public String toString() {
         return "Order{" +
                 "id=" + id +
-                ", id_customer=" + id_customer +
-                ", id_ferryman=" + id_ferryman +
+                ", id_order=" + id_order +
                 ", startPlace='" + startPlace + '\'' +
                 ", finalPlace='" + finalPlace + '\'' +
                 ", price=" + price +
