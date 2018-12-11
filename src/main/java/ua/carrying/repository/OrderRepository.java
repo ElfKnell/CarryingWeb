@@ -42,7 +42,7 @@ public class OrderRepository {
                 Connection conn = dataSource.getConnection();
                 PreparedStatement stmt = conn.prepareStatement("INSERT INTO order (id," +
                         "id_customer, id_ferryman, startPlace,finalPlace," +
-                        "orderDate) VALUES (?,?,?,?,?,?,?,?,?,?)")
+                        "orderDate) VALUES (?,?,?,?,?,?)")
         ) {
             stmt.setString(1, order.getId());
             stmt.setString(2, order.getId_customer());
@@ -53,7 +53,7 @@ public class OrderRepository {
 
             stmt.executeUpdate();
         }  catch (SQLException e) {
-            e.printStackTrace()
+            e.printStackTrace();
         }
     }
 }
