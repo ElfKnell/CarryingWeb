@@ -44,9 +44,9 @@ public class OrderRepository {
                         "id_customer, id_ferryman, startPlace,finalPlace," +
                         "orderDate) VALUES (?,?,?,?,?,?)")
         ) {
-            stmt.setString(1, order.getId());
-            stmt.setString(2, order.getId_customer());
-            stmt.setString(3, order.getId_ferryman());
+            stmt.setLong(1, order.getId());
+            stmt.setLong(2, order.getId_customer());
+            stmt.setLong(3, order.getId_ferryman());
             stmt.setString(4, order.getStartPlace());
             stmt.setString(5, order.getFinalPlace());
             stmt.setString(6, order.getOrderDate());
