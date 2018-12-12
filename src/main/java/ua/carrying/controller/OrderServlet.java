@@ -1,8 +1,9 @@
 package ua.carrying.controller;
 
 
-import ua.carrying.model.*;
-import ua.carrying.repository.OrderRepository;
+import ua.carrying.dao.etities.*;
+import ua.carrying.dao.repository.OrderRepository;
+import ua.carrying.view.CustomersView;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -25,8 +26,7 @@ public class OrderServlet extends HttpServlet {
         PrintWriter out = response.getWriter();
         HttpSession session = request.getSession();
 
-        User user;
-        user = (User)session.getAttribute("user");
+        User user = (User)session.getAttribute("user");
 
         if (user == null) {
             response.sendRedirect("/main");
@@ -45,7 +45,7 @@ public class OrderServlet extends HttpServlet {
             noteRepository.saveOrder(order);
         }
 
-       // View orderView = new OrderView();
-        //out.println(orderView.getHtml());
+        CustomersView customersView = new CustomersView();
+        out.println(customersView.getHtml());
     }
 }

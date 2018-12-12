@@ -1,6 +1,6 @@
-package ua.carrying.repository;
+package ua.carrying.dao.repository;
 
-import ua.carrying.model.Order;
+import ua.carrying.dao.etities.Order;
 
 
 import java.sql.*;

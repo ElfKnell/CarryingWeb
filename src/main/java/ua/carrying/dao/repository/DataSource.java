@@ -1,4 +1,4 @@
-package ua.carrying.repository;
+package ua.carrying.dao.repository;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

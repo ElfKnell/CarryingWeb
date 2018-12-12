@@ -1,4 +1,4 @@
-package ua.carrying.model;
+package ua.carrying.dao.etities;
 
 public class Order {
 
