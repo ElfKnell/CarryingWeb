@@ -4,7 +4,6 @@ public class Customers {
 
     private long id_customer;
     private String adress;
-    private String telephone;
     /*адреси в соц. мережах*/
     private String society;
     /*тривалість активності на сайті*/
@@ -16,10 +15,9 @@ public class Customers {
     public Customers() {
     }
 
-    public Customers(long id_customer, String adress, String telephone, String society, String time_loyality, int raiting, String cv) {
+    public Customers(long id_customer, String adress, String society, String time_loyality, int raiting, String cv) {
         this.id_customer = id_customer;
         this.adress = adress;
-        this.telephone = telephone;
         this.society = society;
         this.time_loyality = time_loyality;
         this.raiting = raiting;
@@ -40,14 +38,6 @@ public class Customers {
 
     public void setAdress(String adress) {
         this.adress = adress;
-    }
-
-    public String getTelephone() {
-        return telephone;
-    }
-
-    public void setTelephone(String telephone) {
-        this.telephone = telephone;
     }
 
     public String getSociety() {
@@ -87,7 +77,6 @@ public class Customers {
         return "Customers{" +
                 "id_customer=" + id_customer +
                 ", adress='" + adress + '\'' +
-                ", telephone='" + telephone + '\'' +
                 ", society='" + society + '\'' +
                 ", time_loyality='" + time_loyality + '\'' +
                 ", raiting=" + raiting +
