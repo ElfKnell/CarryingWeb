@@ -9,7 +9,7 @@ public class OrderRepository {
     public Order getOrderById(Long id) {
         DataSource dataSource = new DataSource();
 
-        String query = "SELECT id, userName, email, password, roleid, id_customer, id_ferryman," +
+        String query = "SELECT id," +
                 "startPlace, finalPlace,orderDate FROM order " +
                 "WHERE user.id=" + id;
 
@@ -40,16 +40,13 @@ public class OrderRepository {
         DataSource dataSource = new DataSource();
         try (
                 Connection conn = dataSource.getConnection();
-                PreparedStatement stmt = conn.prepareStatement("INSERT INTO order (id," +
-                        "id_customer, id_ferryman, startPlace,finalPlace," +
-                        "orderDate) VALUES (?,?,?,?,?,?)")
-        ) {
-            stmt.setLong(1, order.getId());
-            stmt.setLong(2, order.getId_customer());
-            stmt.setLong(3, order.getId_ferryman());
-            stmt.setString(4, order.getStartPlace());
-            stmt.setString(5, order.getFinalPlace());
-            stmt.setString(6, order.getOrderDate());
+                PreparedStatement stmt = conn.prepareStatement("INSERT INTO `order`(startPlace, finalPlace, orderDate) VALUES (?,?,?)")
+                )
+                {
+
+            stmt.setString(1, order.getStartPlace());
+            stmt.setString(2, order.getFinalPlace());
+            stmt.setString(3, order.getOrderDate());
 
             stmt.executeUpdate();
         }  catch (SQLException e) {
