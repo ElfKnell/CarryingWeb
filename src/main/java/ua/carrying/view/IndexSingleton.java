@@ -15,6 +15,8 @@ public class IndexSingleton {
     private String menu;
     private String login;
     private String register;
+    private String orderIndex;
+    private String orderForm;
 
     private static IndexSingleton ourInstance = new IndexSingleton();
 
@@ -49,6 +51,14 @@ public class IndexSingleton {
         return register;
     }
 
+    public String getOrderIndex() {
+        return orderIndex;
+    }
+
+    public String getOrderForm() {
+        return orderForm;
+    }
+
     public String getHtmlPath() {
         return htmlPath;
     }
@@ -61,6 +71,8 @@ public class IndexSingleton {
         this.login = getPartialHtml("login.html");
         this.register = getPartialHtml("register.html");
         this.body = getPartialHtml("body.html");
+        this.orderIndex = getPartialHtml("order-index.html");
+        this.orderForm = getPartialHtml("order-form.html");
     }
 
     private String getPartialHtml(String filename){

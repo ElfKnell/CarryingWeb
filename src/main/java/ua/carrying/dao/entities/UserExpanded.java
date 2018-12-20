@@ -1,6 +1,6 @@
 package ua.carrying.dao.entities;
 
-public class Customers {
+public class UserExpanded {
 
     private  long id;
     private long id_customer;
@@ -13,11 +13,11 @@ public class Customers {
     /*короткий опис про себе*/
     private String cv;
 
-    public Customers() {
+    public UserExpanded() {
     }
 
-    public Customers(long id, long id_customer, String adress, String telephone,
-                     String society, String time_loyality, int raiting, String cv) {
+    public UserExpanded(long id, long id_customer, String adress, String telephone,
+                        String society, String time_loyality, int raiting, String cv) {
         this.id = id;
         this.id_customer = id_customer;
         this.adress = adress;
@@ -86,7 +86,7 @@ public class Customers {
 
     @Override
     public String toString() {
-        return "Customers{" +
+        return "UserExpanded{" +
                 "id=" + id +
                 ", id_customer=" + id_customer +
                 ", adress='" + adress + '\'' +
