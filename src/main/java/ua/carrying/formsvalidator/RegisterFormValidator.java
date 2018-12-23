@@ -47,7 +47,7 @@ public class RegisterFormValidator {
         // check userName min 4 letters
         CheckField checkFieldMin4 = field -> {
             if ( field.length() < 4 ) {
-                messageError = "Minimum 4 letters in userName!";
+                messageError = "Min. 4 letters in userName!";
                 return false;
             }
             return true;
@@ -56,19 +56,18 @@ public class RegisterFormValidator {
             return false;
         }
 
-        // check userName full name (first and second)
-       /*
+        /* check userName full name (first and second)
         CheckField checkFielduserName = field -> {
-            boolean res = field.matches("^[a-zA-Z\\\\s]*$");
+            boolean res = field.matches("^[A-Za-zА-Яа-яЄєЇїІіЪъЫыЭэ\\s]{1,}[\\.]{0,1}[A-Za-zА-Яа-яЄєЇїІіЪъЫыЭэ\\s]{0,}$");
             if (!res) {
                 messageError = "Invalid userName!";
-            }
+
+                            }
             return res;
         };
         if (!checkFielduserName.isCorrect(userName)) {
             return false;
-        }
-        */
+        } */
 
         //check email if correct
         CheckField checkFieldEmail = field -> {
@@ -84,32 +83,18 @@ public class RegisterFormValidator {
             return false;
         }
 
-        //check password minimun 4
-        CheckField checkFieldMin4passw = field -> {
-            if ( field.length() < 8 ) {
-                messageError = "Minimum 8 letters in password!";
-                return false;
-            }
-            return true;
-        };
-
-        if ( ! checkFieldMin4passw.isCorrect(password)) {
-            return false;
-        }
-
-        /*
-        // check password has min 1 number
-        CheckField checkFieldMin1Number = field -> {
-            boolean res = field.matches("^[0-9]$");
+        // check password secure
+        //(?=.*[@#$%^&+=,.])
+        CheckField checkFieldPassword = field -> {
+            boolean res = field.matches("^(?=.*[0-9])(?=.*[a-z])(?=.*[A-Z])(?=\\S+$).{6,}$");
             if (! res) {
-                messageError = "Password must has a number!";
+                messageError = "Your password has low safety. It will has must: a min. 6 symbols, at least once a digit, a lower case letter, an upper case letter, no whitespace allowed in the entire string!";
             }
             return res;
         };
-        if ( ! checkFieldMin1Number.isCorrect(password)) {
+        if ( ! checkFieldPassword.isCorrect(password)) {
             return false;
         }
-        */
 
         /*
         //check phone if correct
