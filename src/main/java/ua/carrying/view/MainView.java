@@ -7,6 +7,7 @@ public class MainView {
         return indexSingleton.getPage()
                 .replace("<!--###menu###-->", indexSingleton.getMenu())
                 .replace("<!--###login###-->", indexSingleton.getLogin())
+                .replace("<!--###log###-->", indexSingleton.getMenuLogin())
                 .replace("<!--###body###-->", indexSingleton.getBody());
     }
 }

@@ -2,6 +2,7 @@ package ua.carrying.controller;
 
 import ua.carrying.dao.entities.Order;
 import ua.carrying.dao.entities.User;
+
 import ua.carrying.dao.repository.OrderRepository;
 import ua.carrying.view.OrderView;
 
@@ -31,46 +32,54 @@ public class OrderServlet extends HttpServlet {
 
         OrderRepository orderRepository = new OrderRepository();
 
+        OrderView orderView = new OrderView();
+
         if (user == null) {
-            response.sendRedirect("/car/");
+            response.sendRedirect("/car");
             return;
         }
 
-        if ( request.getParameter("startPlace") != null ) {
+        if (user.getRole() == 4) {
+            out.println(orderView.getIndex(orderRepository.getOredrsByFerrymanId()));
+        }
+
+        if ( request.getParameter("start_place") != null ) {
             String str, str2;
             String[] word;
             String[] rDate;
             Order order = new Order();
             order.setId_customer(user.getId());
-            order.setStartPlace(request.getParameter("startPlace"));
+            order.setStart_place(request.getParameter("start_place"));
 
-            order.setFinalPlace(request.getParameter("finalPlace"));
+            order.setFinal_place(request.getParameter("final_place"));
 
             order.setPrice(Double.valueOf(request.getParameter("price")));
             order.setWeight(Double.valueOf(request.getParameter("weight")));
             order.setVolume(request.getParameter("volume"));
 
-            str = request.getParameter("sendDate");
+            str = request.getParameter("send_date");
             word = str.split("/");
             str = word[2] + "-" + word[0] + "-" + word[1];
-            order.setSendDate(str);
-            str2 = request.getParameter("receiveDate");
+            order.setSend_date(str);
+            str2 = request.getParameter("receive_date");
             rDate = str2.split("/");
             str2 = rDate[2] + "-" + rDate[0] + "-" + rDate[1];
-            order.setReceiveDate(str2);
+            order.setReceive_date(str2);
             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-            order.setOrderDate(timestamp.toString());
-            System.out.println(str + "///" + str2);
+            order.setOrder_date(timestamp.toString());
+
             orderRepository.saveOrder(order);
         }
 
-        OrderView orderView = new OrderView();
+
         switch (request.getPathInfo()) {
             case "/index":
-                //out.println(orderView.getHtml(orderRepository.getNotesByCustomerId(user.getId())));
-                break;
+                if (user.getRole() == 3)
+                    out.println(orderView.getIndex(orderRepository.getOrderByCustomerId(user.getId())));
+                    break;
             default:
-                out.println(orderView.getHtml());
+                if (user.getRole() == 3)
+                    out.println(orderView.getHtml());
         }
 
     }

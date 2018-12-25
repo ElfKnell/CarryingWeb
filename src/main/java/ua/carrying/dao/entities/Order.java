@@ -8,32 +8,32 @@ public class Order {
     private long id;
     private long id_customer;
     private long id_ferryman;
-    private String startPlace;
-    private String finalPlace;
-    private Double price;
-    private Double weight;
+    private String start_place;
+    private String final_place;
+    private double price;
+    private double weight;
     private String volume;
-    private String sendDate;
-    private String receiveDate;
-    private String orderDate;
+    private String send_date;
+    private String receive_date;
+    private String order_date;
 
     public Order() {
     }
 
     public Order(long id, long id_customer, long id_ferryman,
-                 String startPlace, String finalPlace, Double price, Double weight,
-                 String volume, String sendDate, String receiveDate, String orderDate) {
+                 String start_place, String final_place, double price, double weight,
+                 String volume, String send_date, String receive_date, String order_date) {
         this.id = id;
         this.id_customer = id_customer;
         this.id_ferryman = id_ferryman;
-        this.startPlace = startPlace;
-        this.finalPlace = finalPlace;
+        this.start_place = start_place;
+        this.final_place = final_place;
         this.price = price;
         this.weight = weight;
         this.volume = volume;
-        this.sendDate = sendDate;
-        this.receiveDate = receiveDate;
-        this.orderDate = orderDate;
+        this.send_date = send_date;
+        this.receive_date = receive_date;
+        this.order_date = order_date;
     }
 
     public long getId() {
@@ -60,31 +60,31 @@ public class Order {
         this.id_ferryman = id_ferryman;
     }
 
-    public String getOrderDate() {
-        return orderDate;
+    public String getOrder_date() {
+        return order_date;
     }
 
-    public void setOrderDate(String orderDate) {
-        this.orderDate = orderDate;
+    public void setOrder_date(String order_date) {
+        this.order_date = order_date;
     }
 
-    public String getStartPlace() {
-        return startPlace;
+    public String getStart_place() {
+        return start_place;
     }
 
-    public void setStartPlace(String startPlace) {
-        this.startPlace = startPlace;
+    public void setStart_place(String start_place) {
+        this.start_place = start_place;
     }
 
-    public String getFinalPlace() {
-        return finalPlace;
+    public String getFinal_place() {
+        return final_place;
     }
 
-    public void setFinalPlace(String finalPlace) {
-        this.finalPlace = finalPlace;
+    public void setFinal_place(String final_place) {
+        this.final_place = final_place;
     }
 
-    public Double getPrice() {
+    public double getPrice() {
         return price;
     }
 
@@ -92,7 +92,7 @@ public class Order {
         this.price = price;
     }
 
-    public Double getWeight() {
+    public double getWeight() {
         return weight;
     }
 
@@ -108,20 +108,20 @@ public class Order {
         this.volume = volume;
     }
 
-    public String getSendDate() {
-        return sendDate;
+    public String getSend_date() {
+        return send_date;
     }
 
-    public void setSendDate(String sendDate) {
-        this.sendDate = sendDate;
+    public void setSend_date(String send_date) {
+        this.send_date = send_date;
     }
 
-    public String getReceiveDate() {
-        return receiveDate;
+    public String getReceive_date() {
+        return receive_date;
     }
 
-    public void setReceiveDate(String receiveDate) {
-        this.receiveDate = receiveDate;
+    public void setReceive_date(String receive_date) {
+        this.receive_date = receive_date;
     }
 
     @java.lang.Override
@@ -130,14 +130,14 @@ public class Order {
                 "id=" + id +
                 ", id_customer=" + id_customer +
                 ", id_ferryman=" + id_ferryman +
-                ", startPlace='" + startPlace + '\'' +
-                ", finalPlace='" + finalPlace + '\'' +
+                ", start_place='" + start_place + '\'' +
+                ", final_place='" + final_place + '\'' +
                 ", price=" + price +
                 ", weight=" + weight +
                 ", volume='" + volume + '\'' +
-                ", sendDate='" + sendDate + '\'' +
-                ", receiveDate='" + receiveDate + '\'' +
-                ", orderDate='" + orderDate + '\'' +
+                ", send_date='" + send_date + '\'' +
+                ", receive_date='" + receive_date + '\'' +
+                ", order_date='" + order_date + '\'' +
                 '}';
     }
 }

@@ -9,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
@@ -22,6 +23,7 @@ public class UserServlet extends HttpServlet {
 
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+        HttpSession session = request.getSession();
         String rol;
 
         if ( request.getParameter("email") != null ) {
@@ -47,6 +49,10 @@ public class UserServlet extends HttpServlet {
             case "/register":
                 UserView userView = new UserView();
                 out.println(userView.getHtml());
+                break;
+            case "/logout":
+                session.setAttribute("user", null);
+                response.sendRedirect("/car");
                 break;
             default:
                 out.println("<html><head><title>MyServlet</title></head><body>");
