@@ -1,6 +1,6 @@
 package ua.carrying.controller;
 
-import ua.carrying.dao.etities.User;
+import ua.carrying.dao.entities.User;
 import ua.carrying.dao.repository.UserRepository;
 import ua.carrying.view.IndexSingleton;
 import ua.carrying.view.MainView;
@@ -14,7 +14,6 @@ import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 
-
 @WebServlet(name = "MainServlet", urlPatterns = ("/car"), loadOnStartup = 1)
 public class MainServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
@@ -27,11 +26,11 @@ public class MainServlet extends HttpServlet {
 
         HttpSession session = request.getSession();
 
-        if (request.getParameter("email") != null) {
+        if ( request.getParameter("email") != null ) {
             UserRepository userRepository = new UserRepository();
             User user = userRepository.getUserByEmailByPassword(request.getParameter("email"),
                     request.getParameter("password"));
-            if (user == null) {
+            if ( user == null ) {
                 out.write("<h2>Please Login Again</h2>");
             } else {
                 session.setAttribute("user", user);

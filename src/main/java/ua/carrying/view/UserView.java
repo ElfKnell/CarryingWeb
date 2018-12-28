@@ -1,6 +1,7 @@
 package ua.carrying.view;
 
 public class UserView {
+
     public String getHtml() {
         IndexSingleton indexSingleton = IndexSingleton.getInstance();
         return indexSingleton.getPage()
@@ -8,4 +9,3 @@ public class UserView {
                 .replace("<!--###login###-->", indexSingleton.getRegister());
     }
 }
-

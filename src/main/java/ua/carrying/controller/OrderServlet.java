@@ -1,9 +1,10 @@
 package ua.carrying.controller;
 
+import ua.carrying.dao.entities.Order;
+import ua.carrying.dao.entities.User;
 
-import ua.carrying.dao.etities.*;
 import ua.carrying.dao.repository.OrderRepository;
-import ua.carrying.view.CustomersView;
+import ua.carrying.view.OrderView;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -24,28 +25,68 @@ public class OrderServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
         PrintWriter out = response.getWriter();
+
         HttpSession session = request.getSession();
 
-        User user = (User)session.getAttribute("user");
+        User user = (User) session.getAttribute("user");
+
+        OrderRepository orderRepository = new OrderRepository();
+
+        OrderView orderView = new OrderView();
 
         if (user == null) {
-            response.sendRedirect("/main");
+            response.sendRedirect("/car");
             return;
         }
 
-        // save order
-        if ( request.getParameter("startPlace") != null ) {
-            Order order = new Order();
-            order.setStartPlace(request.getParameter("startPlace"));
-            order.setFinalPlace(request.getParameter("finalPlace"));
-            order.setId_customer(user.getId());//
-            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-            order.setOrderDate(timestamp.toString());
-            OrderRepository noteRepository = new OrderRepository();
-            noteRepository.saveOrder(order);
+        if (user.getRole() == 4) {
+            out.println(orderView.getIndex(orderRepository.getOredrsByFerrymanId()));
         }
 
-        CustomersView customersView = new CustomersView();
-        out.println(customersView.getHtml());
+        if ( request.getParameter("start_place") != null ) {
+            String str, str2;
+            String[] word;
+            String[] rDate;
+            Order order = new Order();
+            order.setId_customer(user.getId());
+            order.setStart_place(request.getParameter("start_place"));
+
+            order.setFinal_place(request.getParameter("final_place"));
+
+            order.setPrice(Double.valueOf(request.getParameter("price")));
+            order.setWeight(Double.valueOf(request.getParameter("weight")));
+            order.setVolume(request.getParameter("volume"));
+
+            str = request.getParameter("send_date");
+            word = str.split("/");
+            str = word[2] + "-" + word[0] + "-" + word[1];
+            order.setSend_date(str);
+            str2 = request.getParameter("receive_date");
+            rDate = str2.split("/");
+            str2 = rDate[2] + "-" + rDate[0] + "-" + rDate[1];
+            order.setReceive_date(str2);
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            order.setOrder_date(timestamp.toString());
+
+            orderRepository.saveOrder(order);
+        }
+
+
+        switch (request.getPathInfo()) {
+            case "/index":
+                if (user.getRole() == 3)
+                    out.println(orderView.getIndex(orderRepository.getOrderByCustomerId(user.getId())));
+                    break;
+            case "/edit":
+            case "/edit/":
+                    Order order = orderRepository.getOrderById(Long.parseLong(request.getParameter("id")));
+                    out.println(orderView.getExistingOrder(order));
+
+                break;
+            default:
+                if (user.getRole() == 3)
+                    out.println(orderView.getHtml());
+        }
+
     }
 }

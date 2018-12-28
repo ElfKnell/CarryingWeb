@@ -1,6 +1,7 @@
-package ua.carrying.dao.etities;
+package ua.carrying.dao.entities;
 
 public class User {
+
     private long id;
     private String userName;
     private String email;
@@ -9,10 +10,10 @@ public class User {
     private int role;
 
     public User() {
-
     }
 
-    public User(long id, String userName, String email, String password, String phone, int role) {
+    public User(long id, String userName, String email,
+                String password, String phone, int role) {
         this.id = id;
         this.userName = userName;
         this.email = email;
