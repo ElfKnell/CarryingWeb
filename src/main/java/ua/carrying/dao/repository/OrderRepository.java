@@ -18,6 +18,7 @@ public class OrderRepository {
                         "receive_date, order_date) VALUES (?,?,?,?,?,?,?,?,?)")
         ) {
 
+
             stmt.setLong(1, order.getId_customer());
             stmt.setString(2, order.getStart_place());
             stmt.setString(3, order.getFinal_place());
@@ -98,5 +99,63 @@ public class OrderRepository {
         }
 
         return orders;
+    }
+
+    public Order getOrderById( long id ) {
+        DataSource dataSource = new DataSource();
+        Order order = null;
+
+        try (
+                Connection conn = dataSource.getConnection();
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery("SELECT id, id_customer,id_ferryman,start_place,final_place," +
+                        "price,weight,volume,send_date,receive_date,order_date FROM `order` WHERE id = " + id);
+        ) {
+            if ( rs.next() ) {
+                order = new Order(
+                        rs.getLong("id"),
+                        rs.getLong("id_customer"),
+                        rs.getLong("id_customer"),
+                        rs.getString("start_place"),
+                        rs.getString("final_place"),
+                        rs.getDouble("price"),
+                        rs.getDouble("weight"),
+                        rs.getString("volume"),
+                        rs.getString("send_date"),
+                        rs.getString("receive_date"),
+                        rs.getString("order_date")
+                );
+            }
+        }  catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return order;
+    }
+
+    public void updateOrder(Order order, long id) {
+        DataSource dataSource = new DataSource();
+        try (
+                Connection conn = dataSource.getConnection();
+                PreparedStatement stmt = conn.prepareStatement("UPDATE `order` SET start_place = ?, " +
+                        "final_place = ?, price = ?, weight = ?, volume = ?, send_date = ?, " +
+                        "receive_date = ?, order_date = ? WHERE id = " + id);
+        ) {
+            stmt.setString(1, order.getStart_place());
+            stmt.setString(2, order.getFinal_place());
+            stmt.setDouble(3, order.getPrice());
+            stmt.setDouble(4, order.getWeight());
+            stmt.setString(5, order.getVolume());
+            stmt.setString(6, order.getSend_date());
+            stmt.setString(7, order.getReceive_date());
+            stmt.setString(8, order.getOrder_date());
+
+
+            System.out.println(stmt.toString());
+
+            stmt.executeUpdate();
+        }  catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

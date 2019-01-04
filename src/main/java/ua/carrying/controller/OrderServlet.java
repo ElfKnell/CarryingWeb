@@ -43,11 +43,12 @@ public class OrderServlet extends HttpServlet {
             out.println(orderView.getIndex(orderRepository.getOredrsByFerrymanId()));
         }
 
-        if ( request.getParameter("start_place") != null ) {
+        if ( (request.getParameter("start_place") != null) && !(request.getPathInfo().equals("/edit") )) {
             String str, str2;
             String[] word;
             String[] rDate;
             Order order = new Order();
+
             order.setId_customer(user.getId());
             order.setStart_place(request.getParameter("start_place"));
 
@@ -69,6 +70,41 @@ public class OrderServlet extends HttpServlet {
             order.setOrder_date(timestamp.toString());
 
             orderRepository.saveOrder(order);
+
+            System.out.println(request.getPathInfo());
+
+            out.println(orderView.getIndex(orderRepository.getOrderByCustomerId(user.getId())));
+
+        } if ( (request.getParameter("start_place") != null) && (request.getPathInfo().equals("/edit") ) ) {
+
+            Order order = new Order();
+            long idd;
+            String str, str2;
+            String[] word;
+            String[] rDate;
+
+            idd = Long.valueOf(request.getParameter("orderid"));
+
+            order.setStart_place(request.getParameter("start_place"));
+
+            order.setFinal_place(request.getParameter("final_place"));
+
+            order.setPrice(Double.valueOf(request.getParameter("price")));
+            order.setWeight(Double.valueOf(request.getParameter("weight")));
+            order.setVolume(request.getParameter("volume"));
+
+            str = request.getParameter("send_date");
+            word = str.split("/");
+            str = word[2] + "-" + word[0] + "-" + word[1];
+            order.setSend_date(str);
+            str2 = request.getParameter("receive_date");
+            rDate = str2.split("/");
+            str2 = rDate[2] + "-" + rDate[0] + "-" + rDate[1];
+            order.setReceive_date(str2);
+            Timestamp timestamp = new Timestamp(System.currentTimeMillis());
+            order.setOrder_date(timestamp.toString());
+            orderRepository.updateOrder(order, idd);
+            out.println(orderView.getIndex(orderRepository.getOrderByCustomerId(user.getId())));
         }
 
 
@@ -77,6 +113,13 @@ public class OrderServlet extends HttpServlet {
                 if (user.getRole() == 3)
                     out.println(orderView.getIndex(orderRepository.getOrderByCustomerId(user.getId())));
                     break;
+            case "/edit":
+            case "/edit/":
+                Order order = orderRepository.getOrderById(Long.parseLong(request.getParameter("id")));
+
+
+                out.println(orderView.getExistingOrder(order));
+                break;
             default:
                 if (user.getRole() == 3)
                     out.println(orderView.getHtml());

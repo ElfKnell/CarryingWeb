@@ -23,7 +23,8 @@ public class OrderView {
                 .replace("<!--###body###-->", indexSingleton.getOrderIndex());
 
         String allOrders = orders.stream().map(n -> {
-            return "<div class=\"col-6 col-sm-4 col-md-3\" Style=\"padding-top: 5%;\">\n" +
+            return "<a href=\"/order/edit?id=" + n.getId() + "\">"+
+                    "<div class=\"col-6 col-sm-4 col-md-3\" Style=\"padding-top: 5%;\">\n" +
                     "<h3>" + n.getStart_place() + "</h3>\n" +
                     "<h3>" + n.getFinal_place() + "</h3>\n" +
                     "<p>" + n.getPrice() + "</p>" +
@@ -32,12 +33,38 @@ public class OrderView {
                     "<p>" + n.getSend_date() + "</p>" +
                     "<p>" + n.getReceive_date() + "</p>" +
                     "</div>\n" +
+                    "</a>" +
                     "<!--###-add-order-###-->";
         }).collect(Collectors.joining(" "));
 
 
 
         return page.replace("<!--###-add-order-###-->", allOrders);
+    }
+
+    public String getExistingOrder(Order order) {
+        IndexSingleton indexSingleton = IndexSingleton.getInstance();
+        System.out.println(order.toString());
+        return indexSingleton.getPage()
+                .replace("<!--###menu###-->", indexSingleton.getMenu())
+                .replace("<!--###body###-->", indexSingleton.getOrderEdit())
+                .replace("id order\"></textarea>", "id order1\">" + order.getId() + "</textarea>")
+                .replace("St\"></textarea>", "St\">" +
+                        order.getStart_place() +
+                        "</textarea>")
+                .replace("or\"></textarea>", "or\">" +
+                        order.getFinal_place() +
+                        "</textarea>").replace("Price\"></textarea>", "Price\">" +
+                        order.getPrice() +
+                        "</textarea>").replace("Weight\"></textarea>", "Weight\">" +
+                        order.getWeight() +
+                        "</textarea>").replace("Volume\"></textarea>", "Volume\">" +
+                        order.getVolume() +
+                        "</textarea>").replace("<!--###-add-date-send-###-->", order.getSend_date())
+                .replace("<!--###-add-date-receive-###-->", order.getReceive_date())
+                .replace("<!--###existing-order-id###-->",
+                        "<input name=\"orderid\" type=\"hidden\" value=\"" + order.getId() + "\">");
+
     }
 
 }

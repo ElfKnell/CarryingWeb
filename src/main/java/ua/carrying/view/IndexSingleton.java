@@ -20,6 +20,7 @@ public class IndexSingleton {
     private String menuLogin;
     private String menuLogout;
     private String menuOrders;
+    private String orderEdit;
 
     private static IndexSingleton ourInstance = new IndexSingleton();
 
@@ -74,6 +75,10 @@ public class IndexSingleton {
         return orderForm;
     }
 
+    public String getOrderEdit() {
+        return orderEdit;
+    }
+
     public String getHtmlPath() {
         return htmlPath;
     }
@@ -88,6 +93,7 @@ public class IndexSingleton {
         this.body = getPartialHtml("body.html");
         this.orderIndex = getPartialHtml("order-index.html");
         this.orderForm = getPartialHtml("order-form.html");
+        this.orderEdit = getPartialHtml("order-edit.html");
         this.menuLogin = getPartialHtml("menu-login.html");
         this.menuLogout = getPartialHtml("menu-logout.html");
         this.menuOrders = getPartialHtml("menu-index.html");
