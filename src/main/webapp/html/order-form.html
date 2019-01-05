@@ -1,0 +1,50 @@
+
+<div class="container" style="padding-top: 5%;">
+<form>
+
+    <div class="form-group">
+        <label for="inputAddress">Address start</label>
+        <input type="text" name="startPlace" class="form-control"  id="inputAddress" placeholder="1234 Main St">
+    </div>
+    <div class="form-group">
+        <label for="inputAddress2">Address final</label>
+        <input type="text" name="finalPlace" class="form-control"  id="inputAddress2" placeholder="Apartment, studio, or floor">
+    </div>
+        <div class="form-row">
+    <div class="form-group col-md-4">
+        <label for="inputPrice4">Price</label>
+        <input type="text" class="form-control" name="price" id="inputPrice4" placeholder="Price">
+    </div>
+    <div class="form-group col-md-4">
+        <label for="inputWeight4">Weight</label>
+        <input type="text" class="form-control" name="weight" id="inputWeight4" placeholder="Weight">
+    </div>
+        </div>
+    <div class="form-group">
+        <label for="formGroupExampleInput">Volume</label>
+        <input type="text" class="form-control" name="volume" id="formGroupExampleInput" placeholder="Example input">
+    </div>
+    <div class="form-group col-md-6">
+    <label for="sendDate">Send Date</label>
+    <input id="sendDate" name="sendDate" width="276" />
+    <script>
+        $('#sendDate').datepicker({
+            uiLibrary: 'bootstrap4'
+        });
+    </script>
+    </div>
+
+    <div class="form-group col-md-6">
+    <label for="receiveDate">Receive Date</label>
+    <input id="receiveDate" name="receiveDate" width="276" />
+    <script>
+        $('#receiveDate').datepicker({
+            uiLibrary: 'bootstrap4'
+        });
+    </script>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Create</button>
+</form>
+
+</div>

@@ -1,6 +1,5 @@
 package ua.carrying.view;
 
-
 public class MainView {
 
     public String getHtml() {
@@ -11,3 +10,8 @@ public class MainView {
                 .replace("<!--###body###-->", indexSingleton.getBody());
     }
 }
+
+
+
+
+
