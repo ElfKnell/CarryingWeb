@@ -8,7 +8,7 @@ public class RegisterFormValidator {
     private String phone;
     private String messageError;
 
-        private interface CheckField {
+    private interface CheckField {
         boolean isCorrect(String field);
     }
 
@@ -56,7 +56,7 @@ public class RegisterFormValidator {
             return false;
         }
 
-         //check email if correct
+        //check email if correct
         CheckField checkFieldEmail = field -> {
             boolean res =  field.matches("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
                     + "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
@@ -84,6 +84,18 @@ public class RegisterFormValidator {
             return false;
         }
 
-         return true;
+        // check phone must to be
+        CheckField checkFieldPhone = field -> {
+            if ( field.isEmpty ()) {
+                messageError = "Phone number can not be empty";
+                return false;
+            }
+            return true;
+        };
+        if ( ! checkFieldPhone.isCorrect(phone)) {
+            return false;
+        }
+
+        return true;
     }
 }
