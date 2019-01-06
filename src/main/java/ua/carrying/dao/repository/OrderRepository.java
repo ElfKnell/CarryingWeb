@@ -131,30 +131,24 @@ public class OrderRepository {
 
         return order;
     }
-  /*  public List<String> getOrders() {
+    public void takeOrder(Long uId, long id) {
         DataSource dataSource = new DataSource();
-        List<String> lorders = new ArrayList<>();
-
         try (
                 Connection conn = dataSource.getConnection();
-                Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery("SELECT id, id_customer, start_place,final_place from `order`")
-
+                PreparedStatement stmt = conn.prepareStatement("UPDATE `order` SET id_ferryman = ? " +
+                        "WHERE id = " + id);
         ) {
-            while ( rs.next() ) {
+            stmt.setLong(1,uId);
 
-                       String s = String.valueOf(rs.getLong("id"))+
-                        rs.getLong("id_customer")+
-                        rs.getString("start_place")+
-                        rs.getString("final_place")+
-                        rs.getString("order_date");
-                       lorders.add(s);
+            System.out.println(stmt.toString());
 
-            }
+            stmt.executeUpdate();
+
         }  catch (SQLException e) {
             e.printStackTrace();
         }
+    }
 
-        return lorders;*/
+
     }
 

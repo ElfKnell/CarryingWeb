@@ -39,8 +39,15 @@ public class OrderServlet extends HttpServlet {
             return;
         }
 
+
         if (user.getRole() == 4) {
-            out.println(orderView.getIndex(orderRepository.getOredrsByFerrymanId()));
+            out.println(orderView.getIndexFerry(orderRepository.getOredrsByFerrymanId()));
+        }
+        if(request.getParameter("orderid") !=null){
+            Long fid;
+            fid = Long.valueOf(request.getParameter("orderid"));
+            Long uId = user.getId();
+            orderRepository.takeOrder(uId,fid);
         }
 
         if ( request.getParameter("start_place") != null ) {
