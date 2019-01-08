@@ -1,0 +1,46 @@
+<div class="container" style="padding-top: 5%;">
+    <form>
+
+
+        <label><!--###-add-adress-start-###--></label>
+        <label><!--###-add-adress-final-###--></label>
+        <label><!--###-add-price-###--></label>
+        <label><!--###-add-weight-###--></label>
+        <label><!--###-add-volume-###--></label>
+        <label><!--###-add-date-send-###--></label>
+        <label><!--###-add-date-receive-###--></label>
+
+            <div class="form-group col-md-4">
+                <label for="inputPrice4">Price</label>
+                <textarea type="text" class="form-control" name="price" id="inputPrice4" placeholder="Price"></textarea>
+            </div>
+
+
+        <div class="form-group col-md-6">
+            <label for="send_date">Send Date</label>
+
+            <input id="send_date" name="send_date" width="276" />
+            <script>
+                $('#send_date').datepicker({
+                    uiLibrary: 'bootstrap4'
+                });
+            </script>
+        </div>
+
+        <div class="form-group col-md-6">
+            <label for="receive_date">Receive Date</label>
+
+            <input id="receive_date" name="receive_date" width="276" />
+            <script>
+                $('#receive_date').datepicker({
+                    uiLibrary: 'bootstrap4'
+                });
+            </script>
+        </div>
+        <!--###existing-order-id###-->
+        <button type="submit" class="btn btn-primary">Accept</button>
+
+        <!--###-add-order-###-->
+    </form>
+
+</div>

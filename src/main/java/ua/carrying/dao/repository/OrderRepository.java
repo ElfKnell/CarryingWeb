@@ -44,7 +44,9 @@ public class OrderRepository {
         try (
                 Connection conn = dataSource.getConnection();
                 Statement stmt = conn.createStatement();
-                ResultSet rs = stmt.executeQuery("SELECT id, id_customer, id_ferryman, start_place, final_place, price, weight, volume, send_date, receive_date, order_date FROM `order` WHERE id_customer = " + idCustomer);
+                ResultSet rs = stmt.executeQuery("SELECT id, id_customer, id_ferryman, start_place, " +
+                        "final_place, price, weight, volume, send_date, receive_date, " +
+                        "order_date FROM `order` WHERE id_customer = " + idCustomer + " AND id_ferryman = " + 0);
         ) {
             while ( rs.next() ) {
                 orders.add(new Order(
@@ -151,11 +153,93 @@ public class OrderRepository {
             stmt.setString(8, order.getOrder_date());
 
 
-            System.out.println(stmt.toString());
+            //System.out.println(stmt.toString());
 
             stmt.executeUpdate();
         }  catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public void takeOrder(long uId, long id) {
+        DataSource dataSource = new DataSource();
+        try (
+                Connection conn = dataSource.getConnection();
+                PreparedStatement stmt = conn.prepareStatement("UPDATE `order` SET id_ferryman = ? " +
+                        "WHERE id = " + id);
+        ) {
+            stmt.setLong(1,uId);
+
+            stmt.executeUpdate();
+
+        }  catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public List<Order> getOredrsByFerrymanAccepted(long ferryman) {
+        DataSource dataSource = new DataSource();
+        List<Order> orders = new ArrayList<>();
+
+        try (
+                Connection conn = dataSource.getConnection();
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery("SELECT id, id_customer, id_ferryman, start_place," +
+                        " final_place, price, weight, volume, send_date, " +
+                        "receive_date, order_date FROM `order` WHERE id_ferryman = " + ferryman);
+        ) {
+            while ( rs.next() ) {
+                orders.add(new Order(
+                        rs.getLong("id"),
+                        rs.getLong("id_customer"),
+                        rs.getLong("id_ferryman"),
+                        rs.getString("start_place"),
+                        rs.getString("final_place"),
+                        rs.getDouble("price"),
+                        rs.getDouble("weight"),
+                        rs.getString("volume"),
+                        rs.getString("send_date"),
+                        rs.getString("receive_date"),
+                        rs.getString("order_date")
+                ));
+            }
+        }  catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return orders;
+    }
+
+    public List<Order> getOrderByCustomerIdAccepted(long idCustomer ) {
+        DataSource dataSource = new DataSource();
+        List<Order> orders = new ArrayList<>();
+
+        try (
+                Connection conn = dataSource.getConnection();
+                Statement stmt = conn.createStatement();
+                ResultSet rs = stmt.executeQuery("SELECT id, id_customer, id_ferryman, start_place, " +
+                        "final_place, price, weight, volume, send_date, receive_date, " +
+                        "order_date FROM `order` WHERE id_customer = " + idCustomer + " AND id_ferryman > " + 0);
+        ) {
+            while ( rs.next() ) {
+                orders.add(new Order(
+                        rs.getLong("id"),
+                        rs.getLong("id_customer"),
+                        rs.getLong("id_ferryman"),
+                        rs.getString("start_place"),
+                        rs.getString("final_place"),
+                        rs.getDouble("price"),
+                        rs.getDouble("weight"),
+                        rs.getString("volume"),
+                        rs.getString("send_date"),
+                        rs.getString("receive_date"),
+                        rs.getString("order_date")
+                ));
+            }
+        }  catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        return orders;
     }
 }

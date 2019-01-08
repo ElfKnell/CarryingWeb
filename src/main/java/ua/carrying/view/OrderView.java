@@ -12,6 +12,7 @@ public class OrderView {
                 .replace("<!--###menu###-->", indexSingleton.getMenu())
                 .replace("<!--###log###-->", indexSingleton.getMenuLogout())
                 .replace("<!--###all-orders###-->", indexSingleton.getMenuOrders())
+                .replace("<!--###my-orders###-->", indexSingleton.getMenuAccepted())
                 .replace("<!--###body###-->", indexSingleton.getOrderForm());
     }
 
@@ -20,10 +21,11 @@ public class OrderView {
         String page = indexSingleton.getPage()
                 .replace("<!--###menu###-->", indexSingleton.getMenu())
                 .replace("<!--###log###-->", indexSingleton.getMenuLogout())
+                .replace("<!--###my-orders###-->", indexSingleton.getMenuAccepted())
                 .replace("<!--###body###-->", indexSingleton.getOrderIndex());
 
         String allOrders = orders.stream().map(n -> {
-            return "<a href=\"/order/edit?id=" + n.getId() + "\">"+
+            return
                     "<div class=\"col-6 col-sm-4 col-md-3\" Style=\"padding-top: 5%;\">\n" +
                     "<h3>" + n.getStart_place() + "</h3>\n" +
                     "<h3>" + n.getFinal_place() + "</h3>\n" +
@@ -32,21 +34,24 @@ public class OrderView {
                     "<p>" + n.getVolume() + "</p>" +
                     "<p>" + n.getSend_date() + "</p>" +
                     "<p>" + n.getReceive_date() + "</p>" +
+                            "<a class=\"btn btn-outline-primary\" href=\"/order/accept?id=" + n.getId() + "\">"+
+                            "Who has accepted the order" +"</a>" +
+                            "<a class=\"btn btn-outline-primary\" href=\"/order/edit?id=" + n.getId() + "\">"+
+                            "Edit" +"</a>" +
                     "</div>\n" +
-                    "</a>" +
+
                     "<!--###-add-order-###-->";
         }).collect(Collectors.joining(" "));
-
-
 
         return page.replace("<!--###-add-order-###-->", allOrders);
     }
 
     public String getExistingOrder(Order order) {
         IndexSingleton indexSingleton = IndexSingleton.getInstance();
-        System.out.println(order.toString());
+        //System.out.println(order.toString());
         return indexSingleton.getPage()
                 .replace("<!--###menu###-->", indexSingleton.getMenu())
+                .replace("<!--###log###-->", indexSingleton.getMenuLogout())
                 .replace("<!--###body###-->", indexSingleton.getOrderEdit())
                 .replace("id order\"></textarea>", "id order1\">" + order.getId() + "</textarea>")
                 .replace("St\"></textarea>", "St\">" +
@@ -54,17 +59,22 @@ public class OrderView {
                         "</textarea>")
                 .replace("or\"></textarea>", "or\">" +
                         order.getFinal_place() +
-                        "</textarea>").replace("Price\"></textarea>", "Price\">" +
+                        "</textarea>")
+                .replace("Price\"></textarea>", "Price\">" +
                         order.getPrice() +
-                        "</textarea>").replace("Weight\"></textarea>", "Weight\">" +
+                        "</textarea>")
+                .replace("Weight\"></textarea>", "Weight\">" +
                         order.getWeight() +
-                        "</textarea>").replace("Volume\"></textarea>", "Volume\">" +
+                        "</textarea>")
+                .replace("Volume\"></textarea>", "Volume\">" +
                         order.getVolume() +
-                        "</textarea>").replace("<!--###-add-date-send-###-->", order.getSend_date())
+                        "</textarea>")
+                .replace("<!--###-add-date-send-###-->", order.getSend_date())
                 .replace("<!--###-add-date-receive-###-->", order.getReceive_date())
                 .replace("<!--###existing-order-id###-->",
                         "<input name=\"orderid\" type=\"hidden\" value=\"" + order.getId() + "\">");
 
     }
+
 
 }

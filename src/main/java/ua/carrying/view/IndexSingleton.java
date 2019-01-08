@@ -20,7 +20,10 @@ public class IndexSingleton {
     private String menuLogin;
     private String menuLogout;
     private String menuOrders;
+    private String menuAccepted;
     private String orderEdit;
+    private String orderAccept;
+    private String orderAccepts;
 
     private static IndexSingleton ourInstance = new IndexSingleton();
 
@@ -67,6 +70,10 @@ public class IndexSingleton {
         return menuOrders;
     }
 
+    public String getMenuAccepted() {
+        return menuAccepted;
+    }
+
     public String getOrderIndex() {
         return orderIndex;
     }
@@ -77,6 +84,14 @@ public class IndexSingleton {
 
     public String getOrderEdit() {
         return orderEdit;
+    }
+
+    public String getOrderAccept() {
+        return orderAccept;
+    }
+
+    public String getOrderAccepts() {
+        return orderAccepts;
     }
 
     public String getHtmlPath() {
@@ -97,6 +112,9 @@ public class IndexSingleton {
         this.menuLogin = getPartialHtml("menu-login.html");
         this.menuLogout = getPartialHtml("menu-logout.html");
         this.menuOrders = getPartialHtml("menu-index.html");
+        this.menuAccepted = getPartialHtml("menu-accepted.html");
+        this.orderAccept = getPartialHtml("order-accept.html");
+        this.orderAccepts = getPartialHtml("order-accepts.html");
     }
 
     private String getPartialHtml(String filename){

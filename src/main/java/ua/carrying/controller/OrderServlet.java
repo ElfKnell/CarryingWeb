@@ -4,6 +4,7 @@ import ua.carrying.dao.entities.Order;
 import ua.carrying.dao.entities.User;
 
 import ua.carrying.dao.repository.OrderRepository;
+import ua.carrying.view.ConnectionUserOrderView;
 import ua.carrying.view.OrderView;
 
 import javax.servlet.ServletException;
@@ -33,15 +34,14 @@ public class OrderServlet extends HttpServlet {
         OrderRepository orderRepository = new OrderRepository();
 
         OrderView orderView = new OrderView();
+        ConnectionUserOrderView connectionUserOrderView = new ConnectionUserOrderView();
 
         if (user == null) {
             response.sendRedirect("/car");
             return;
         }
 
-        if (user.getRole() == 4) {
-            out.println(orderView.getIndex(orderRepository.getOredrsByFerrymanId()));
-        }
+
 
         if ( (request.getParameter("start_place") != null) && !(request.getPathInfo().equals("/edit") )) {
             String str, str2;
@@ -70,10 +70,8 @@ public class OrderServlet extends HttpServlet {
             order.setOrder_date(timestamp.toString());
 
             orderRepository.saveOrder(order);
-
-            System.out.println(request.getPathInfo());
-
-            out.println(orderView.getIndex(orderRepository.getOrderByCustomerId(user.getId())));
+            response.sendRedirect("/order/index");
+            //out.println(orderView.getIndex(orderRepository.getOrderByCustomerId(user.getId())));
 
         } if ( (request.getParameter("start_place") != null) && (request.getPathInfo().equals("/edit") ) ) {
 
@@ -103,8 +101,10 @@ public class OrderServlet extends HttpServlet {
             order.setReceive_date(str2);
             Timestamp timestamp = new Timestamp(System.currentTimeMillis());
             order.setOrder_date(timestamp.toString());
+
             orderRepository.updateOrder(order, idd);
-            out.println(orderView.getIndex(orderRepository.getOrderByCustomerId(user.getId())));
+            response.sendRedirect("/order/index");
+            //out.println(orderView.getIndex(orderRepository.getOrderByCustomerId(user.getId())));
         }
 
 
@@ -116,14 +116,28 @@ public class OrderServlet extends HttpServlet {
             case "/edit":
             case "/edit/":
                 Order order = orderRepository.getOrderById(Long.parseLong(request.getParameter("id")));
-
-
                 out.println(orderView.getExistingOrder(order));
                 break;
+            case "/accepted":
+            case "/accepted/":
+                if (user.getRole() == 4) {
+                    out.println(connectionUserOrderView.getIndexFerrymanAccepted(orderRepository.getOredrsByFerrymanAccepted(user.getId())));
+                    break;
+                } if (user.getRole() == 3) {
+                out.println(connectionUserOrderView.getIndexFerrymanAccepted(orderRepository.getOrderByCustomerIdAccepted(user.getId())));
+                break;
+                } else
+                    break;
+
             default:
                 if (user.getRole() == 3)
                     out.println(orderView.getHtml());
+                if (user.getRole() == 4) {
+                    out.println(connectionUserOrderView.getIndexFerryman(orderRepository.getOredrsByFerrymanId()));
+                }
         }
+
+
 
     }
 }
