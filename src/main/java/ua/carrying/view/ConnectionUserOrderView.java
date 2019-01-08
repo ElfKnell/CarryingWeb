@@ -80,7 +80,7 @@ public class ConnectionUserOrderView {
         return indexSingleton.getPage()
                 .replace("<!--###menu###-->", indexSingleton.getMenu())
                 .replace("<!--###log###-->", indexSingleton.getMenuLogout())
-                //.replace("<!--###all-orders###-->", indexSingleton.getMenuOrders())
+                .replace("<!--###all-orders###-->", indexSingleton.getMenuOrders())
                 .replace("<!--###body###-->", indexSingleton.getOrderAccepts())
 
                 .replace("<!--###-add-adress-start-###-->", order.getStart_place())
@@ -103,7 +103,7 @@ public class ConnectionUserOrderView {
         String page = indexSingleton.getPage()
                 .replace("<!--###menu###-->", indexSingleton.getMenu())
                 .replace("<!--###log###-->", indexSingleton.getMenuLogout())
-                .replace("<!--###all-orders###-->", indexSingleton.getMenuAccepted())
+                //.replace("<!--###all-orders###-->", indexSingleton.getMenuAccepted())
                 .replace("<!--###body###-->", indexSingleton.getOrderIndex());
 
         String allOrders = orders.stream().map(n -> {

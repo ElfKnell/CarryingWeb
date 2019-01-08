@@ -103,8 +103,8 @@ public class OrderServlet extends HttpServlet {
             order.setOrder_date(timestamp.toString());
 
             orderRepository.updateOrder(order, idd);
-            response.sendRedirect("/order/index");
-            //out.println(orderView.getIndex(orderRepository.getOrderByCustomerId(user.getId())));
+            //response.sendRedirect("/order/index");
+            out.println(orderView.getIndex(orderRepository.getOrderByCustomerId(user.getId())));
         }
 
 
